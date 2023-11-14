@@ -1,7 +1,5 @@
 
-import cors from 'cors';
-import morgan from 'morgan';
-import ErrorHandler from './middlewares/error.handleHttp';
+
 import db from "./config/db";
 import './config/env';
 import httpServer from './config/hhtp';
@@ -24,7 +22,7 @@ const bootstrap = async ()=>{
     httpServer.listen(PORT, () => {
         console.log(`Server listo por el puerto ${PORT}`);
     });
-    
+
 }
 
 bootstrap();
