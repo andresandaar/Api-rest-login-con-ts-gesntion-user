@@ -4,10 +4,6 @@
     "target": "es5",
     "moduleResolution": "node",
     "module": "commonjs",
-    "baseUrl":"./",
-    "paths": {
-     "@lib/*": ["src/lib/*"],
-    },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",

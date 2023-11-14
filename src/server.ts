@@ -1,15 +1,15 @@
 
-import 'module-alias/register';
+
 import express from 'express';
 import cors from "cors";
 import morgan from "morgan";
-//import ErrorHandler from "./middlewares/error.handleHttp";
+import ErrorHandler from "./middlewares/error.handleHttp";
 import "dotenv/config";
-import { printHello } from '@lib/hello';
+
 //import db from "./config/mongo";
 //import routes from "./routes";
 class Server {
-  public app: express.Application;
+                                 public app: express.Application;
   public PORT!: any;
 
   constructor() {
@@ -35,11 +35,11 @@ class Server {
     this.app.use(express.json());
     this.app.use(morgan('dev'));
   }
-
+  
   routes() {
-   /* this.app.use('/',routes);
-   this.app.use(ErrorHandler.handleHttp); */
-   printHello()
+   //this.app.use('/',routes);
+   this.app.use(ErrorHandler.handleHttp);
+
   }
 
   start() {
