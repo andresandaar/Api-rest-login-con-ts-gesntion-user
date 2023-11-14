@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "lib": ["es5", "es6"],
+    "target": "es5",
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "baseUrl":"./",
+    "paths": {
+     "@lib/*": ["src/lib/*"],
+    },
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "skipLibCheck": true,
+
+
+
+  }
+}
