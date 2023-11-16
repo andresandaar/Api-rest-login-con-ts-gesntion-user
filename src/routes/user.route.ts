@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { Request, Response, NextFunction } from 'express';
 import UserController from '../controllers/user.controller';
-import userRegisterDTO from '../middlewares/user-register.dto';
+import {  userValidatorLogin, userValidatorRegister, userValidatorUpdataEmail, userValidatorUpdataPassword, userValidatorUpdataUser } from '../middlewares/user-validator.dto';
 //import sessionHandler from '../middlewares/session.handle';
 
 class UserRouter {
@@ -14,11 +14,43 @@ class UserRouter {
 
     routes() {
         this.router
-            .get('/profile', [userRegisterDTO], UserController.getItem)
-            .post('/register', [userRegisterDTO], (req: Request, res: Response) => {
-                res.send();
-            });
-        /*   .post('/login',UserController.addUser)
+            .get('/profile', UserController.getItem)
+            .post(
+                '/register',
+                [userValidatorRegister],
+                (req: Request, res: Response) => {
+                    res.send();
+                },
+            )
+            .post(
+                '/login',
+                [userValidatorLogin],
+                (req: Request, res: Response) => {
+                    res.send('ok login');
+                },
+            )
+            .patch(
+                '/update-data',
+                [userValidatorUpdataUser],
+                (req: Request, res: Response) => {
+                    res.send('ok login');
+                },
+            )
+            .patch(
+                '/update-email',
+                [userValidatorUpdataEmail],
+                (req: Request, res: Response) => {
+                    res.send('ok login');
+                },
+            )
+            .patch(
+                '/update-password',
+                [userValidatorUpdataPassword],
+                (req: Request, res: Response) => {
+                    res.send('ok login');
+                },
+            );
+        /*   .post('/login',[userValidatorRegister],UserController.addUser)
           .patch('/update-data',UserController.updateUser)
           .patch('/update-email',UserController.updateUser)
           .patch('/update-password',UserController.updateUser)
