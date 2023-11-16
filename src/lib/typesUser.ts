@@ -2,7 +2,7 @@ import { Type } from '@sinclair/typebox';
 
 export default class DtoTypes {
 
-    public static _idDtoSchema = Type.String({
+    public static _idType = Type.String({
         format: 'uuid',
         errorMessage: {
             type: 'El tipo de _id no es válido,debe ser un string',
@@ -10,7 +10,7 @@ export default class DtoTypes {
         },
     });
 
-    public static nameDtoSchema = Type.String({
+    public static nameType = Type.String({
         minLength: 2,
         maxLength: 20,
         errorMessage: {
@@ -21,7 +21,7 @@ export default class DtoTypes {
         },
     });
 
-    public static surnameDtoSchema = Type.String({
+    public static surnameType = Type.String({
         minLength: 4,
         maxLength: 50,
         errorMessage: {
@@ -32,7 +32,7 @@ export default class DtoTypes {
         },
     });
 
-    public static emailDtoSchema = Type.String({
+    public static emailType = Type.String({
         format: 'email',
         errorMessage: {
             type: 'El tipo del email no es válido, debe ser un string',
@@ -40,7 +40,7 @@ export default class DtoTypes {
         },
     });
 
-    public static passwordDtoSchema = Type.String({
+    public static passwordType = Type.String({
         format: 'password',
         minLength: 10,
         maxLength: 25,
