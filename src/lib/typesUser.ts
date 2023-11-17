@@ -1,7 +1,6 @@
 import { Type } from '@sinclair/typebox';
 
 export default class DtoTypes {
-
     public static _idType = Type.String({
         format: 'uuid',
         errorMessage: {
@@ -18,6 +17,17 @@ export default class DtoTypes {
                 'El name debe de tener al menos 2 caracteres de longitud',
             maxLength:
                 'El name debe de tener como máximo 20 caracteres de longitud',
+        },
+    });
+    public static roleType = Type.String({
+        minLength: 2,
+        maxLength: 20,
+        enum: ['Admin' , 'Client'],
+        errorMessage: {
+            minLength: 'El rol debe de tener al menos 2 caracteres de longitud',
+            maxLength:
+                'El rol debe de tener como máximo 20 caracteres de longitud',
+            enum:"El rol no esta permitido"
         },
     });
 
@@ -53,5 +63,4 @@ export default class DtoTypes {
                 'El password debe de tener como máximo 25 caracteres de longitud',
         },
     });
-    
 }

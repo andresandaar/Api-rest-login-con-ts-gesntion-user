@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import Schemas from '../lib/schemasUser';
-import ValidSchemaUser from '../Helpers/validSchemaUser';
+import ValidSchemaUser from '../helpers/validSchemaUser';
 // Aqui se validan cada uno de los campos del usuario y sus entradas
 class ValidatorUser extends ValidSchemaUser {
     private isValid!: boolean;

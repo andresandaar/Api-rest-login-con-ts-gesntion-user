@@ -1,8 +1,8 @@
-import { Auth } from "./auth.interfaces";
-
-
+import { Auth } from "./auth.interface";
 export interface User extends Auth {
-    _id?:string
+    _id?: string;
     name: string;
-    surname:string
+    surname: string;
+    role: roleType;
 }
+export type roleType = 'Admin' | 'Client';

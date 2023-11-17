@@ -62,6 +62,7 @@ import addErrors from 'ajv-errors';
 
      protected validUserUnregister(body: any, schema: TObject<{}>) {
            const ajv: Ajv = new Ajv({ allErrors: true });
+           addFormats(ajv, ['email']).addKeyword('kind').addKeyword('modifier');
            ajv.addFormat('password', /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/);
            addErrors(ajv);
          this.validateSchema = ajv.compile(schema);

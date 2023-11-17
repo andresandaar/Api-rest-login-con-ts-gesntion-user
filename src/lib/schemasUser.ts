@@ -1,14 +1,15 @@
 
-import { TProperties,TObject,Type  } from '@sinclair/typebox';
+import { TObject,Type  } from '@sinclair/typebox';
 import DtoTypes from './typesUser';
 
 export default class SchemasUser {
     // Esquema para el registro de usuarios
     public static register: TObject<{}> = Type.Object(
         {
-            _id: DtoTypes._idType,
+            //_id: DtoTypes._idType,
             name: DtoTypes.nameType,
             surname: DtoTypes.surnameType,
+            role: DtoTypes.roleType,
             email: DtoTypes.emailType,
             password: DtoTypes.passwordType,
         },
@@ -55,6 +56,7 @@ export default class SchemasUser {
     // Esquema para eliminar la cuenta del usuarios
     public static Unregister: TObject<{}> = Type.Object(
         {
+            email: DtoTypes.emailType,
             password: DtoTypes.passwordType,
         },
         { additionalProperties: false },
