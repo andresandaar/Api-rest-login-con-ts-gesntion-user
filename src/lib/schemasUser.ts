@@ -15,8 +15,7 @@ export default class SchemasUser {
         {
             additionalProperties: false,
             errorMessage: {
-                additionalProperties:
-                    'El tipo de propiedad no es valida ',
+                additionalProperties: 'El tipo de propiedad no es valida ',
             },
         },
     );
@@ -40,11 +39,21 @@ export default class SchemasUser {
     public static emailUpdate: TObject<{}> = Type.Object(
         {
             email: DtoTypes.emailType,
+            password: DtoTypes.passwordType,
         },
         { additionalProperties: false },
     );
     // Esquema para actualizar la contraseña del usuarios
     public static passwordUpdate: TObject<{}> = Type.Object(
+        {
+            oldPassword: DtoTypes.passwordType,
+            newPassword: DtoTypes.passwordType,
+        },
+        { additionalProperties: false },
+    );
+
+    // Esquema para eliminar la cuenta del usuarios
+    public static Unregister: TObject<{}> = Type.Object(
         {
             password: DtoTypes.passwordType,
         },

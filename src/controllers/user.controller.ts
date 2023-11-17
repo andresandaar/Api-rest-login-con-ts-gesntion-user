@@ -139,6 +139,7 @@ export default class UserController {
         res: Response,
         next: NextFunction,
     ) => {
+      res.json('hola');
         /*   const {id}=req.params
    try {
       const response = await this.itemServices.deleteCar(id);
