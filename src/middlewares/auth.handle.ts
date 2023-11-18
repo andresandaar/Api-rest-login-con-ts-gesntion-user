@@ -5,7 +5,7 @@ import createError from "http-errors";
 import { RequestExt } from "../interfaces/requestExt.interface";
 
 
-export default class sessionHandler {
+export default class AuthHandle {
   static checkJwt =async (req: RequestExt, res: Response,  next: NextFunction): Promise<any>=> {
     const jwtByUserToken =req.headers.authorization || null;
     const jwtToken:any =jwtByUserToken?.split(' ').pop();//Solo el token sin el bearer

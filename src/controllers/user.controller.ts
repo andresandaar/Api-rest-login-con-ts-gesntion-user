@@ -1,18 +1,16 @@
 
-import { NextFunction, Request, Response, json, response } from "express";
+import { NextFunction, Request, Response} from "express";
  import { UserServices } from "../services/user.service";
  import { RequestExt } from '../interfaces/requestExt.interface';
-/*";
-import { ValidateFields } from "../utils/validate.fields";
- */
+
 //import createError from "http-errors";
 
 
 export default class UserController {
     private static userServices = UserServices;
 
-    // Agrega o registra un nuevo usuario
-    static registerUser = async (
+    // Registra un nuevo usuario
+    static register = async (
         { body }: Request,
         res: Response,
         next: NextFunction,
@@ -25,8 +23,8 @@ export default class UserController {
         }
     };
 
-    // Agrega un nuevo elemento
-    static loginUser = async (
+    // Inicio de sesion con un suario existente
+    static login = async (
         { body }: Request,
         res: Response,
         next: NextFunction,
@@ -44,7 +42,7 @@ export default class UserController {
     };
 
     // Obtiene un usuario en  específico
-    static getUser = async (
+    static getUserById = async (
         req: Request,
         res: Response,
         next: NextFunction,
@@ -78,7 +76,7 @@ export default class UserController {
     };
 
     // Actualiza un usuario en espesifico
-    static updateUser = async (
+    static updateUserById = async (
         req: Request,
         res: Response,
         next: NextFunction,
@@ -125,4 +123,5 @@ export default class UserController {
     ) => {
         res.json('hola');
     };
+
 }

@@ -1,11 +1,11 @@
 
 import { TObject } from '@sinclair/typebox';
-import Ajv, { Format, ValidateFunction } from 'ajv';
-import addFormats, { FormatsPluginOptions } from 'ajv-formats';
+import Ajv, {ValidateFunction } from 'ajv';
+import addFormats from 'ajv-formats';
 import addErrors from 'ajv-errors';
 //https://www.typescriptlang.org/docs/handbook/2/classes.html
 
- export default class ValidSchemaUser {
+ export default class UserSchemaValidator {
      private validateSchema!: ValidateFunction;
 
      protected validSchemaErrors() {
@@ -16,6 +16,7 @@ import addErrors from 'ajv-errors';
              };
          });
      }
+     
      protected validRegister(body: any, schema: TObject<{}>) {
          const ajv: Ajv = new Ajv({ allErrors: true });
          addFormats(ajv, ['uuid', 'email'])

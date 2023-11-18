@@ -1,7 +1,7 @@
 import { Auth } from '../interfaces/auth.interface';
 import { User } from '../interfaces/user.interface';
 import UserModel from '../schemas/user.schemas';
-import { BcryptHandle } from '../helpers/bcrypt.handle';
+import { BcryptHandle } from '../helpers/encrypt.handle';
 import createError from 'http-errors';
 import { jwtHandle } from '../helpers/jwt.handle';
 
@@ -37,6 +37,7 @@ export class UserServices {
         const token = jwtHandle.generateToken({ id, email, role });
         return token;
     };
+    
     //Traer todos los usuarios
     static getUsers = async () => {
         const response = await UserModel.find({}, [

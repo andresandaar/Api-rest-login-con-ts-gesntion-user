@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import UserController from '../controllers/user.controller';
-import validator from '../middlewares/validatorUser';
-import ValidSession from '../middlewares/session.handle';
-import { checkRole } from '../middlewares/role';
+import CheckSchema from '@middlewares/userSchema.handle';
+import AuthHandle from '../middlewares/auth.handle';
+import RoleHandle from '../middlewares/role.handle';
 //import sessionHandler from '../middlewares/session.handle';
 
 class UserRouter {
@@ -16,33 +16,38 @@ class UserRouter {
     routes() {
         //http://localhost:3000/user/profiles
         this.router
-            .get('/profile/:id', UserController.getUser)
+            .post('/register', [CheckSchema.register], UserController.register)
+
+            .post('/login', [CheckSchema.login], UserController.login)
+
+            .get('/profile/:id', UserController.getUserById)
+
             .get('/profiles', UserController.getUsers)
-            .post(
-                '/register',
-                [validator.register],
-                UserController.registerUser,
-            )
-            .post('/login', [validator.login], UserController.loginUser)
 
             .patch(
                 '/update/:id',
-                [ValidSession.checkJwt,checkRole(['Admin']), validator.userUpdate],
-                UserController.updateUser,
+                [
+                    AuthHandle.checkJwt,
+                    RoleHandle.checkRole(['Admin']),
+                    CheckSchema.userUpdate,
+                ],
+                UserController.updateUserById,
             )
+
             .patch(
                 '/update-email/:id',
-                [ValidSession.checkJwt, validator.emailUpdata],
+                [AuthHandle.checkJwt, CheckSchema.emailUpdata],
                 UserController.updateEmail,
             )
+
             .patch(
                 '/update-password/:id',
-                [ValidSession.checkJwt, validator.passwordUpdata],
+                [AuthHandle.checkJwt, CheckSchema.passwordUpdata],
                 UserController.updatePassword,
             )
             .delete(
                 '/unregister',
-                [ValidSession.checkJwt, validator.userUnregister],
+                [AuthHandle.checkJwt, CheckSchema.userUnregister],
                 UserController.deleteUser,
             );
     }

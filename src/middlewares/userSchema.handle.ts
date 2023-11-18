@@ -1,13 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
-import Schemas from '../lib/schemasUser';
-import ValidSchemaUser from '../helpers/validSchemaUser';
+import SchemasUser from '../lib/schemasUser';
+import UserSchemaValidator from '../helpers/userSchemaValidator';
 // Aqui se validan cada uno de los campos del usuario y sus entradas
-class ValidatorUser extends ValidSchemaUser {
+class UserSchemaHandle extends UserSchemaValidator {
     private isValid!: boolean;
 
     constructor() {
         super();
     }
+
     //Retorna un conjunto de errores
     private verifiedErrors(res: Response) {
         return res.status(400).json({
@@ -17,19 +18,19 @@ class ValidatorUser extends ValidSchemaUser {
 
     //Funciones que validan los datos el usuario, segun sea el caso
     register = (req: Request, res: Response, next: NextFunction) => {
-        this.isValid = this.validRegister(req.body, Schemas.register);
+        this.isValid = this.validRegister(req.body, SchemasUser.register);
         if (!this.isValid) return this.verifiedErrors(res);
         next();
     };
 
     login = (req: Request, res: Response, next: NextFunction) => {
-        this.isValid = this.validLogin(req.body, Schemas.login);
+        this.isValid = this.validLogin(req.body, SchemasUser.login);
         if (!this.isValid) return this.verifiedErrors(res);
         next();
     };
 
     emailUpdata = (req: Request, res: Response, next: NextFunction) => {
-        this.isValid = this.validEmailUpdata(req.body, Schemas.emailUpdate);
+        this.isValid = this.validEmailUpdata(req.body, SchemasUser.emailUpdate);
         if (!this.isValid) return this.verifiedErrors(res);
         next();
     };
@@ -37,25 +38,29 @@ class ValidatorUser extends ValidSchemaUser {
     passwordUpdata = (req: Request, res: Response, next: NextFunction) => {
         this.isValid = this.validPasswordUpdata(
             req.body,
-            Schemas.passwordUpdate,
+            SchemasUser.passwordUpdate,
         );
         if (!this.isValid) return this.verifiedErrors(res);
         next();
     };
 
     userUpdate = (req: Request, res: Response, next: NextFunction) => {
-        this.isValid = this.validUserUpdate(req.body, Schemas.userUpdate);
+        this.isValid = this.validUserUpdate(req.body, SchemasUser.userUpdate);
         if (!this.isValid) return this.verifiedErrors(res);
         next();
     };
+
     userUnregister = (req: Request, res: Response, next: NextFunction) => {
-        this.isValid = this.validUserUnregister(req.body, Schemas.Unregister);
+        this.isValid = this.validUserUnregister(
+            req.body,
+            SchemasUser.Unregister,
+        );
         if (!this.isValid) return this.verifiedErrors(res);
         next();
     };
 }
-const validUser = new ValidatorUser();
-export default validUser;
+const userSchemaHandle = new UserSchemaHandle();
+export default userSchemaHandle;
 
 
 //export default userRegisterDTOValidator

@@ -1,6 +1,6 @@
 import { Type } from '@sinclair/typebox';
 
-export default class DtoTypes {
+export default class TypesUser {
     public static _idType = Type.String({
         format: 'uuid',
         errorMessage: {
