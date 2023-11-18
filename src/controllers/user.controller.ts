@@ -16,8 +16,8 @@ export default class UserController {
         next: NextFunction,
     ) => {
         try {
-            const responseUser = await this.userServices.registerNewUser(body);
-            res.send(responseUser);
+            const resp = await this.userServices.registerNewUser(body);
+            res.status(200).send(resp);
         } catch (error) {
             next(error);
         }
@@ -29,13 +29,9 @@ export default class UserController {
         res: Response,
         next: NextFunction,
     ) => {
-        const { email, password } = body;
         try {
-            const responseUser = await this.userServices.loginUser({
-                email,
-                password,
-            });
-            res.send(responseUser);
+            const resp = await this.userServices.loginUser(body);
+            res.status(200).send(resp);
         } catch (error) {
             next(error);
         }
@@ -83,25 +79,30 @@ export default class UserController {
     ) => {
         const { id } = req.params;
         try {
-            const resp = await this.userServices.updateUser(id,req.body);
-                if (!resp)
-                    return res.json({
-                        error: `No se encontro el usuario con el Id:${id}`,
-                    });
-                res.send(resp);
+            const resp = await this.userServices.updateUser(id, req.body);
+            if (!resp)
+                return res.json({
+                    error: `No se encontro el usuario con el Id:${id}`,
+                });
+            res.send(resp);
         } catch (error) {
             next(error);
         }
     };
 
-    // Elimina un  usuario
+    // Elimina un  usuario necesita ser administrador rol
     static deleteUser = async (
-        { body }: Request,
+        req: RequestExt,
         res: Response,
         next: NextFunction,
     ) => {
+        //Sideseas eliminar un usuario necesitas ser administrador
+        // y tener el ID del usuario y tu contraseña de administrador
+        const idUser = req.params.id;
+        const passwordAdmin  = req.body.password;
+        const userAdmin = req.user;
         try {
-            await this.userServices.deleteUser(body);
+            await this.userServices.deleteUser(idUser, userAdmin, passwordAdmin);
             res.send('Usuario eliminado con exito');
         } catch (error) {
             next(error);
@@ -123,5 +124,4 @@ export default class UserController {
     ) => {
         res.json('hola');
     };
-
 }

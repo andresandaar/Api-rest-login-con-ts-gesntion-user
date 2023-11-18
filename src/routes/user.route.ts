@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import UserController from '../controllers/user.controller';
-import CheckSchema from '@middlewares/userSchema.handle';
+import CheckSchema from '../middlewares/checkSchema.handle';
 import AuthHandle from '../middlewares/auth.handle';
 import RoleHandle from '../middlewares/role.handle';
 //import sessionHandler from '../middlewares/session.handle';
@@ -22,21 +22,25 @@ class UserRouter {
 
             .get('/profile/:id', UserController.getUserById)
 
-            .get('/profiles', UserController.getUsers)
+            .get(
+                '/profiles',
+                [AuthHandle.checkJwt],
+                UserController.getUsers,
+            )
 
             .patch(
                 '/update/:id',
-                [
-                    AuthHandle.checkJwt,
-                    RoleHandle.checkRole(['Admin']),
-                    CheckSchema.userUpdate,
-                ],
+                [AuthHandle.checkJwt, CheckSchema.userUpdate],
                 UserController.updateUserById,
             )
 
             .patch(
                 '/update-email/:id',
-                [AuthHandle.checkJwt, CheckSchema.emailUpdata],
+                [
+                    AuthHandle.checkJwt,
+                    RoleHandle.checkRole(['Admin']),
+                    CheckSchema.emailUpdata,
+                ],
                 UserController.updateEmail,
             )
 
@@ -46,8 +50,12 @@ class UserRouter {
                 UserController.updatePassword,
             )
             .delete(
-                '/unregister',
-                [AuthHandle.checkJwt, CheckSchema.userUnregister],
+                '/unregister/:id',
+                [
+                    AuthHandle.checkJwt,
+                    RoleHandle.checkRole(['Admin']),
+                    CheckSchema.userUnregister,
+                ],
                 UserController.deleteUser,
             );
     }

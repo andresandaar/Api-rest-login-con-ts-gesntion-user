@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import SchemasUser from '../lib/schemasUser';
 import UserSchemaValidator from '../helpers/userSchemaValidator';
 // Aqui se validan cada uno de los campos del usuario y sus entradas
-class UserSchemaHandle extends UserSchemaValidator {
+class CheckSchemaHandle extends UserSchemaValidator {
     private isValid!: boolean;
 
     constructor() {
@@ -59,8 +59,8 @@ class UserSchemaHandle extends UserSchemaValidator {
         next();
     };
 }
-const userSchemaHandle = new UserSchemaHandle();
-export default userSchemaHandle;
+const checkSchemaHandle = new CheckSchemaHandle();
+export default checkSchemaHandle;
 
 
 //export default userRegisterDTOValidator

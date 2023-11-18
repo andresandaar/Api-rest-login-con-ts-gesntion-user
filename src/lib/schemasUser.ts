@@ -56,7 +56,6 @@ export default class SchemasUser {
     // Esquema para eliminar la cuenta del usuarios
     public static Unregister: TObject<{}> = Type.Object(
         {
-            email: DtoTypes.emailType,
             password: DtoTypes.passwordType,
         },
         { additionalProperties: false },

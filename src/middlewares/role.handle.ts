@@ -26,7 +26,7 @@ export default class RoleHandle {
             if (roles.includes(role)) {
                 next();
             } else {
-                res.status(401).send({ message: 'Not authorized' });
+                res.status(401).send({ message: 'Usuario no autorizado' });
             }
         };
     };
