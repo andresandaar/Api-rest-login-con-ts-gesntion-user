@@ -1,20 +1,23 @@
 {
   "compilerOptions": {
-    "lib": ["es5", "es6"],
-    "target": "es5",
-    "moduleResolution": "node",
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist",
+    "target": "es2016",
+    "module": "commonjs",                                
     "rootDir": "./src",
-    "strict": true,
-    "skipLibCheck": true,
-     "sourceMap": true
+    "allowJs": true,                                  
+    "outDir": "build",
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@routes/*": ["./src/routes/*"],
+      "@constrollers/*": ["./src/controllers/*"],
+      "@config/*": ["./src/confing/*"]
+    },
+    "typeRoots": ["./node_modules/@types", "./src/@types"],   
+    "esModuleInterop": true,                         
+    "forceConsistentCasingInFileNames": true,                     
+    "skipLibCheck": true ,
+    "strictNullChecks": true                               
   },
-  "include": [
-    "src/**/*.ts",
-  ],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"],
-  
 }

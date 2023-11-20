@@ -1,5 +1,6 @@
-node_modules
-.env
-.husky
 notas_importantes.txt
 dist
+node_modules
+.env
+build
+importante-leer.txt

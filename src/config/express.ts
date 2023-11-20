@@ -3,7 +3,7 @@ import path from "path";
 import cors from 'cors';
 import morgan from 'morgan';
 import ErrorHandler from '../errorHandling/errorHttp.handle';
-import routes from '../routes';
+import routes from '@routes/index';
 
 
 
@@ -21,7 +21,7 @@ export  class Express {
         this.app.use(cors());
         this.app.use(express.json());
         this.app.use(morgan('dev'));
-        this.app.use(express.static(path.join(__dirname, '../../','public')));
+        this.app.use(express.static(path.join(__dirname, '../','public')));
     }
 
     private routes() {
