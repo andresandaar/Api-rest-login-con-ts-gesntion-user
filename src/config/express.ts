@@ -25,7 +25,7 @@ export  class Express {
     }
 
     private routes() {
-        this.app.use('/', routes);
+        this.app.use('/api', routes);
         this.app.use(ErrorHandler.handleHttp);
     }
 }
