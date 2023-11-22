@@ -25,8 +25,8 @@ export class UserServices {
     const passwordEncrypt = await BcryptHandle.encrypt(password);
     body.password = passwordEncrypt;
 
-    const user = await UserModel.create(body);
-    const newUser = user.toObject({
+    const newUser = await UserModel.create(body);
+    /* const newUser = user.toObject({
       transform: (doc, ret) => {
         // remove the _id of every document before returning the result
         delete ret.password;
@@ -34,13 +34,14 @@ export class UserServices {
         delete ret.updatedAt;
         return ret;
       }
-    });
+    }); */
     const id = newUser._id.toString();
     const token = await jwtHandle.generateToken({ id, email, role });
     const resp = {
       message: 'Usuario creado correctamente',
-      data: newUser,
-      token: token
+      token: token,
+      userId: id,
+      role:role
     };
     return resp;
   };
@@ -62,7 +63,7 @@ export class UserServices {
     if (!isPasswordValid) throw createError(401, 'contraseña incorrecta');
     // specify the transform schema option
     //https://mongoosejs.com/docs/7.x/docs/api/document.html#Document.prototype.toJSON()
-    const user = existingUser.toObject({
+   /*  const user = existingUser.toObject({
       transform: (doc, ret) => {
         // remove the _id of every document before returning the result
         delete ret.password;
@@ -70,18 +71,21 @@ export class UserServices {
         delete ret.updatedAt;
         return ret;
       }
-    });
+    }); */
+    const id=existingUser._id.toString()
+    const role =existingUser.role
     const dataPayload = {
-      id: user._id.toString(),
+      id: id,
       email: email,
-      role: user.role
+      role: role
     };
     const token = await jwtHandle.generateToken(dataPayload);
-    const resp = {
-      message: 'Bienvenido...',
-      data: user,
-      token: token
-    };
+     const resp = {
+       message: 'Bienvenido...',
+       token: token,
+       userId: id,
+       role: role
+     };
     return resp;
   };
 
