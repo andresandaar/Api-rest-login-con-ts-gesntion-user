@@ -1,5 +1,6 @@
-import { JwtPayload, Secret, sign, verify } from "jsonwebtoken"
+import {sign, verify } from "jsonwebtoken"
 import "dotenv/config";
+
 export class jwtHandle {
     private static JWT_SECRET = process.env.JWT_PRIVATE_KEY as string;
     //Generamos un nuevo token de autorizacion
@@ -12,7 +13,7 @@ export class jwtHandle {
 
     //Verificamos el token
     static verifyToken = async (token: string) => {
-        const payload: string | JwtPayload = verify(token, this.JWT_SECRET);
+        const payload:any = verify(token, this.JWT_SECRET);
         return payload;
     };
 }

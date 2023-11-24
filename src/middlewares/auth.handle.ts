@@ -26,7 +26,7 @@ export default class AuthHandle {
             res.locals.payload = payload;
             next();
         } catch (error) {
-            next(createError(401, 'SESSION_NO_VALIDA'));
+            next(error);
         }
     };
 }

@@ -2,7 +2,7 @@ import express, { Application } from 'express';
 import path from "path";
 import cors from 'cors';
 import morgan from 'morgan';
-import ErrorHandler from '../errorHandling/errorHttp.handle';
+import ErrorHandler from '../errorHandling/error.handle';
 import routes from '@routes/index';
 
 

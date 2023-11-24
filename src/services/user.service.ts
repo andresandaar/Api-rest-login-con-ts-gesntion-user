@@ -60,7 +60,7 @@ export class UserServices {
       passwordPlane,
       passwordEncrypt
     );
-    if (!isPasswordValid) throw createError(401, 'contraseña incorrecta');
+    if (!isPasswordValid) throw createError(401, 'La contraseña incorrecta');
     // specify the transform schema option
     //https://mongoosejs.com/docs/7.x/docs/api/document.html#Document.prototype.toJSON()
    /*  const user = existingUser.toObject({
